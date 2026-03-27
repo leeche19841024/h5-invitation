@@ -6,23 +6,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // 报名表单提交
-    rsvpForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+    rsvpForm.addEventListener('submit', async function(event) { // 添加 async
+        event.preventDefault(); // 确保阻止默认提交行为
+
         const name = document.getElementById('name').value;
         const contact = document.getElementById('contact').value;
 
-        if (name && contact) {
-            // 验证联系方式（手机号码）：必须是11位数字
-            const phoneRegex = /^\d{11}$/;
-            if (!phoneRegex.test(contact)) {
-                alert('联系方式输入有误，请重新输入11位数字的手机号码。');
-                return; // 阻止表单提交
-            }
+        if (!name) {
+            alert('请输入您的姓名。');
+            return;
+        }
 
-            alert(`感谢您的报名，${name}！我们已收到您的信息，期待您的光临。`);
-            rsvpForm.reset();
-        } else {
-            alert('请填写您的姓名和联系方式。');
+        const phoneRegex = /^\d{11}$/;
+        if (!phoneRegex.test(contact)) {
+            alert('手机号码输入有误，请重新输入11位数字。');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, contact })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(`感谢您的报名，${name}！我们已收到您的信息，期待您的光临。`);
+                rsvpForm.reset();
+            } else {
+                alert(`报名失败: ${result.message || '未知错误'}`);
+            }
+        } catch (error) {
+            console.error('报名请求失败:', error);
+            alert('报名失败，请稍后再试。');
         }
     });
 
