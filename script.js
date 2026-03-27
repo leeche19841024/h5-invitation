@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/register', {
+            const response = await fetch('http://192.168.0.140:3000/register', { // 更新为您的局域网IP
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
