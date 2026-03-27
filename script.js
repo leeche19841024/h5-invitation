@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const contact = document.getElementById('contact').value;
 
         if (name && contact) {
+            // 验证联系方式（手机号码）：必须是11位数字
+            const phoneRegex = /^\d{11}$/;
+            if (!phoneRegex.test(contact)) {
+                alert('联系方式输入有误，请重新输入11位数字的手机号码。');
+                return; // 阻止表单提交
+            }
+
             alert(`感谢您的报名，${name}！我们已收到您的信息，期待您的光临。`);
             rsvpForm.reset();
         } else {
