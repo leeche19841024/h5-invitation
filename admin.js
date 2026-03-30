@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const exportExcelBtn = document.getElementById('export-excel-btn'); // 获取导出按钮
     const logoutBtn = document.getElementById('logout-btn'); // 获取退出登录按钮
 
-    const BACKEND_URL = 'https://public-bars-notice.loca.lt'; // 后端服务地址
+    const BACKEND_URL = 'https://legal-seas-see.loca.lt'; // 后端服务地址
 
     // 从sessionStorage获取token
     let authToken = sessionStorage.getItem('authToken');
