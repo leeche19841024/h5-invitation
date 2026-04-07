@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const registrationsSection = document.getElementById('registrations-section');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
+    const togglePasswordBtn = document.getElementById('toggle-password'); // 获取密码显示/隐藏按钮
     const loginBtn = document.getElementById('login-btn');
     const loginErrorMessage = document.getElementById('login-error-message');
     const registrationsList = document.getElementById('registrationsList');
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const exportExcelBtn = document.getElementById('export-excel-btn'); // 获取导出按钮
     const logoutBtn = document.getElementById('logout-btn'); // 获取退出登录按钮
 
-    const BACKEND_URL = 'https://every-beans-shop.loca.lt'; // 后端服务地址
+    const BACKEND_URL = 'https://lazy-otters-pump.loca.lt'; // 后端服务地址
 
     // 从sessionStorage获取token
     let authToken = sessionStorage.getItem('authToken');
@@ -166,4 +167,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 退出登录按钮点击事件
     logoutBtn.addEventListener('click', handleLogout);
+
+    // 密码显示/隐藏按钮点击事件
+    togglePasswordBtn.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePasswordBtn.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+    });
 });

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('http://192.168.0.140:3000/register', { // 更新为您的局域网IP
+            const response = await fetch('https://lazy-otters-pump.loca.lt/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
