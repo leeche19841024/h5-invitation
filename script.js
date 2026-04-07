@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let backendUrl = 'http://localhost:3000';
             if (window.location.hostname === 'leeche19841024.github.io') {
                 // 通过GitHub Pages访问时使用外网地址
-                backendUrl = 'https://tame-ghosts-doubt.loca.lt';
+                backendUrl = 'https://fancy-maps-warn.loca.lt';
             }
             
             const response = await fetch(`${backendUrl}/register`, {
