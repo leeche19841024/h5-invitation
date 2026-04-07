@@ -129,7 +129,12 @@ app.get('/export-registrations', authenticateToken, (req, res) => {
 
 
 // 启动服务器
-app.listen(PORT, () => {
-    console.log(`报名后端服务正在运行，监听端口 ${PORT}`);
-    console.log(`访问 http://localhost:${PORT} 以测试`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`报名后端服务正在运行，监听端口 ${PORT}`);
+        console.log(`访问 http://localhost:${PORT} 以测试`);
+    });
+}
+
+// 导出app供Vercel使用
+module.exports = app;

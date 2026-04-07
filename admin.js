@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const username = usernameInput.value;
         const password = passwordInput.value;
         loginErrorMessage.style.display = 'none'; // 隐藏错误消息
+        console.log('登录请求开始，用户名:', username, '密码:', password);
+        console.log('后端服务地址:', BACKEND_URL);
 
         try {
             const response = await fetch(`${BACKEND_URL}/login`, {
@@ -86,16 +88,21 @@ document.addEventListener('DOMContentLoaded', async function() {
                 },
                 body: JSON.stringify({ username, password })
             });
+            console.log('登录请求响应状态:', response.status);
+            console.log('登录请求响应头:', response.headers);
 
             const result = await response.json();
+            console.log('登录请求响应内容:', result);
 
             if (response.ok) {
                 authToken = result.token;
                 sessionStorage.setItem('authToken', authToken); // 保存token
+                console.log('登录成功，token:', authToken);
                 loadRegistrations(authToken); // 登录成功后加载报名信息
             } else {
                 loginErrorMessage.textContent = result.message || '登录失败，请检查用户名和密码。'
                 loginErrorMessage.style.display = 'block';
+                console.log('登录失败:', result.message);
             }
         } catch (error) {
             console.error('登录请求失败:', error);
