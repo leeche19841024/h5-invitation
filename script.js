@@ -45,14 +45,51 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (response.ok) {
-                alert(`感谢您的报名，${name}！我们已收到您的信息，期待您的光临。`);
+                // 创建成功提示元素
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.textContent = `感谢您的报名，${name}！我们已收到您的信息，期待您的光临。`;
+                
+                // 将提示添加到表单下方
+                rsvpForm.parentNode.appendChild(successMessage);
+                
+                // 重置表单
                 rsvpForm.reset();
+                
+                // 3秒后自动移除提示
+                setTimeout(() => {
+                    successMessage.remove();
+                }, 3000);
             } else {
-                alert(`报名失败: ${result.message || '未知错误'}`);
+                // 创建失败提示元素
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'success-message';
+                errorMessage.style.background = 'rgba(231, 76, 60, 0.9)';
+                errorMessage.textContent = `报名失败: ${result.message || '未知错误'}`;
+                
+                // 将提示添加到表单下方
+                rsvpForm.parentNode.appendChild(errorMessage);
+                
+                // 3秒后自动移除提示
+                setTimeout(() => {
+                    errorMessage.remove();
+                }, 3000);
             }
         } catch (error) {
             console.error('报名请求失败:', error);
-            alert('报名失败，请稍后再试。');
+            // 创建错误提示元素
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'success-message';
+            errorMessage.style.background = 'rgba(231, 76, 60, 0.9)';
+            errorMessage.textContent = '报名失败，请稍后再试。';
+            
+            // 将提示添加到表单下方
+            rsvpForm.parentNode.appendChild(errorMessage);
+            
+            // 3秒后自动移除提示
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 3000);
         }
     });
 
