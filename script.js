@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('https://lazy-otters-pump.loca.lt/register', {
+            const response = await fetch('https://tame-ghosts-doubt.loca.lt/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,18 +48,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 分享按钮点击
     shareBtn.addEventListener('click', function() {
+        // 外网可访问的链接
+        const shareUrl = 'https://leeche19841024.github.io/h5-invitation/';
+        
         if (navigator.share) {
             // 在支持的非微信浏览器中，使用Web Share API
             navigator.share({
                 title: '诚邀您参加我们的活动',
                 text: '一场关于H5技术交流与实践的分享会，期待您的参与！',
-                url: window.location.href
+                url: shareUrl
             }).then(() => {
                 console.log('感谢分享！');
             }).catch(console.error);
         } else {
-            // 在其他不支持分享的浏览器中，或在微信内置浏览器中，提示手动分享
-            alert('您的浏览器不支持自动分享功能，请手动复制链接分享。');
+            // 在其他不支持分享的浏览器中，或在微信内置浏览器中，提示手动复制链接分享
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('链接已复制到剪贴板，请粘贴分享给朋友！');
+            }).catch(() => {
+                alert(`请复制以下链接分享：\n${shareUrl}`);
+            });
         }
     });
 });
