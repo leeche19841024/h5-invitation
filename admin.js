@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     const exportExcelBtn = document.getElementById('export-excel-btn'); // 获取导出按钮
     const logoutBtn = document.getElementById('logout-btn'); // 获取退出登录按钮
 
-    const BACKEND_URL = 'https://lazy-otters-pump.loca.lt'; // 后端服务地址
+    // 根据访问环境选择后端服务地址
+    let BACKEND_URL = 'http://localhost:3000';
+    if (window.location.hostname.endsWith('vercel.app')) {
+        // 通过Vercel访问时使用Vercel地址
+        BACKEND_URL = window.location.origin;
+    } else if (window.location.hostname === 'leeche19841024.github.io') {
+        // 通过GitHub Pages访问时使用Vercel地址
+        BACKEND_URL = 'https://h5-invitation-wine.vercel.app';
+    }
 
     // 从sessionStorage获取token
     let authToken = sessionStorage.getItem('authToken');

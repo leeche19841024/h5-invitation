@@ -26,9 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // 根据访问环境选择后端服务地址
             let backendUrl = 'http://localhost:3000';
-            if (window.location.hostname === 'leeche19841024.github.io') {
-                // 通过GitHub Pages访问时使用外网地址
-                backendUrl = 'https://fancy-maps-warn.loca.lt';
+            if (window.location.hostname.endsWith('vercel.app')) {
+                // 通过Vercel访问时使用Vercel地址
+                backendUrl = window.location.origin;
+            } else if (window.location.hostname === 'leeche19841024.github.io') {
+                // 通过GitHub Pages访问时使用Vercel地址
+                backendUrl = 'https://h5-invitation-wine.vercel.app';
             }
             
             const response = await fetch(`${backendUrl}/register`, {
