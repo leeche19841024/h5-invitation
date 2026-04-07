@@ -24,7 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('https://tame-ghosts-doubt.loca.lt/register', {
+            // 根据访问环境选择后端服务地址
+            let backendUrl = 'http://localhost:3000';
+            if (window.location.hostname === 'leeche19841024.github.io') {
+                // 通过GitHub Pages访问时使用外网地址
+                backendUrl = 'https://tame-ghosts-doubt.loca.lt';
+            }
+            
+            const response = await fetch(`${backendUrl}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
