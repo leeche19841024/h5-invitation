@@ -12,12 +12,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "$1"
-    },
-    {
       "src": "/(register|login|registrations|export-registrations)",
       "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "$1"
     }
   ]
 }
